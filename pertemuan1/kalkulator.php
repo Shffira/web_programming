@@ -1,102 +1,75 @@
+<!-- PHP -->
+ 
+ <?php
+$hasil = null;
+
+// mengecek apakah form sudah di submit, 
+// jika berisi metode post maka ambil datanya
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    // ambil data angka nya
+    $bilangan1 = $_POST['angka1'];
+    $bilangan2 = $_POST['angka2'];
+    $operator  = $_POST['operator'];
+
+
+    $hasil =  $bilangan1 + $bilangan2;
+    if ($operator === "+") {
+        $hasil = $bilangan1 + $bilangan2;
+    } elseif ($operator == "-") {
+        $hasil = $bilangan1 - $bilangan2;
+    }  elseif ($operator == "*") {
+        $hasil = $bilangan1 * $bilangan2;
+    }  elseif ($operator == "/") {
+        $hasil = $bilangan1 / $bilangan2;
+    }
+
+    }
+ ?>
+
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kalkulator</title>
-<style>
-     body{
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url(/aset/Screenshotpinterest2.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-
-        }
-        .login{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .login-box{
-            background-color: rgba(98, 96, 96, 1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            width: 320px;
-            text-align: center;
-            color: #fff;
-        }
-        .login-box h2{
-            margin-bottom: 10px;
-            font-size: 28px;
-            font-weight: 600;
-        }
-        .login-box p{
-           font-size: 14px;
-           margin-bottom: 20px;
-           color: #eee; 
-        }
-        .input-box{
-            margin-bottom: 15px;
-        }
-        .input-box input::placeholder{
-            color: #eee;
-        }
-        .remember{
-            text-align: left;
-            font-size: 13px;
-            margin-bottom: 15px;
-        }
-        button{
-            width: 100%;
-            padding: 10px;
-            background:linear-gradient(90deg, #4caf50), #8bc34a;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover{
-            opacity: 0.9;
-        }
-        .signup{
-            margin-top: 15px;
-            font-size: 13px;
-        }
-        .signup a{
-            color: #fff;
-            text-decoration: underline;
-        }
-</style>
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container">
-        <form class="login-box">
-            <h2>kalkulator</h2>
-            <p>Welcome back please login to your account</p>
+<body class="bg-light d-flex justify-content-center
+    align-items-center min-vh-100">
+    <div class="card shadow" style="widht: 30%">
+        <div class="card-body">
+            <h5 class="card-title text-center">Kalkulator</h5>
+            <form method= "POST">
+                <div class="mb-3">
+                    <input class="form-control" type="number" name="angka1" id="angka1"
+                    placeholder="Angka Pertama" value="<?= $bilangan1 ?>">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="number" name="angka2" id="angka2"
+                    placeholder="Angka Kedua" value="<?= $bilangan2 ?>">
+                </div>
+                <div>
+                     <select name="operator" class="form-control">
+                    <option value="+">Tambah</option>
+                    <option value="-">Kurang</option>
+                    <option value="*">Kali</option>
+                    <option value="/">Bagi</option>
+                </select>
+                </div>
+            
+                <button class="btn btn-primary w-100"> Hitung </button>
+            </form>
 
-            <div class="input-box">
-                <input type="username" name="username" id="username" placeholder="username" required />
-                <input type="password" name="password" id="password" placeholder="password" required />
-            </div>
-
-            <div class="remember">
-                <label><input type="checkbox"/>Remember me </label>
-            </div>
-
-            <button type="submit">Login</button>
-            <p class="signup">Don't have an account? <a href="#">signup
-            </a></p>
-        </form>
+            <?php if ($hasil !== null): ?>
+                <div class="alert alert-success text-center mt-2" >
+                    Hasil : <?php echo $hasil ?>
+                </div>
+            <?php endif; ?>
+        
     </div>
 </body>
 </html>
